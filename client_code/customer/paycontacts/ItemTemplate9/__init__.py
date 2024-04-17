@@ -10,8 +10,9 @@ class ItemTemplate9(ItemTemplate9Template):
         self.user = user
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
-        # Any code you write here will run before the form opens.
+        
+        # Print the user attribute to check if it's being received correctly
+        print("User in ItemTemplate9:", self.user)
 
     def button_1_click(self, **event_args):
         # Access the data for the selected user
@@ -22,8 +23,3 @@ class ItemTemplate9(ItemTemplate9Template):
         
         # Open the customer.interaction form and pass the phone number and user information
         open_form('customer.interaction', phone_number=phone_number, user=self.user)
-
-
-  
-
-  
