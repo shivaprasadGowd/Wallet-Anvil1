@@ -16,8 +16,8 @@ class paycontacts(paycontactsTemplate):
             self.init_components(**properties)
             
             # Fetch the phone number from the user object
-            phone_1 = self.user['phone']
-            print("Phone Number:", phone_1)
+            # phone_1 = self.user['phone']
+            # print("Phone Number:", phone_1)
 
             # Fetch all phone numbers from wallet_users table
             phonenumber = app_tables.wallet_users.search()
@@ -28,7 +28,7 @@ class paycontacts(paycontactsTemplate):
             # Pass the phone_1 value as the user attribute to each ItemTemplate9 instance
             for item in self.repeating_panel_1.items:
                 # Use phone_1 as the user attribute
-                self.repeating_panel_1.add_component(ItemTemplate9(user=phone_1, item=item))
+                self.repeating_panel_1.add_component(ItemTemplate9(user=self.user, item=item))
         
         except Exception as e:
             print("Error in __init__:", e)
