@@ -35,3 +35,5 @@ class Home(HomeTemplate):
 
   def button_1_click(self, **event_args):
     open_form('Login')
+
+  
