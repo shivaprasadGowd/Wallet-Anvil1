@@ -69,7 +69,7 @@ class interaction(interactionTemplate):
       for transaction in transactions:
           if transaction['receiver_phone'] == self.phone_number and transaction['phone'] == self.user:
               panel1_items.append(transaction)
-          elif transaction['receiver_phone'] == self.user and transaction['phone'] == self.phone_number:
+          # elif transaction['receiver_phone'] == self.user and transaction['phone'] == self.phone_number:
               panel2_items.append(transaction)
       
       self.repeating_panel_1.items = panel1_items
