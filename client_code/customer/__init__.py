@@ -68,7 +68,7 @@ class customer(customerTemplate):
 
     def button_7_click(self, **event_args):
       """This method is called when the button is clicked"""
-      print("User data before opening paycontacts form:", self.user)
+      
       
       open_form('customer.paycontacts', user=self.user)
 
