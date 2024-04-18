@@ -30,7 +30,7 @@ class paycontacts(paycontactsTemplate):
             print("Error in __init__:", e)
             # Handle the error here
 
-    def button_1_click(self,user=None **event_args):
+    def button_1_click(self, **event_args):
         """This method is called when the button is clicked"""
         try:
             open_form('customer.interaction', user=self.user)
