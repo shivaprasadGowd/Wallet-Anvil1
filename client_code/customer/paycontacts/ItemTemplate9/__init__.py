@@ -12,9 +12,9 @@ class ItemTemplate9(ItemTemplate9Template):
         self.init_components(**properties)
         
         # Print the user attribute to check if it's being received correctly
-        print("User in ItemTemplate9:", self.user)
+        print("User in ItemTemplate9:", user)
 
-    def button_1_click(self, **event_args):
+    def button_1_click(self, user= None,**event_args):
         # Access the data for the selected user
         selected_user = self.item  # Assuming you have set the 'item' property of the repeating panel to the user row
         
