@@ -13,21 +13,16 @@ class customer_page(customer_pageTemplate):
         self.init_components(**properties)
         self.user = user
         user_dict = dict(self.user)
-        self.init_graph()
+        self.refresh_data()
 
         # Assuming user has a 'phone' attribute
         phone_number = user_dict.get('phone', None)
         if phone_number:
-            # Get all transactions
-            all_transactions = app_tables.wallet_users_transaction.search(
-                q.or_(
-                    q.row['phone'] == phone_number,
-                    q.row['receiver_phone'] == phone_number
-                )
-            )
+            # Search transactions based on the user's phone number
+            items = app_tables.wallet_users_transaction.search(phone=phone_number)
         
             # Sort transactions by date in descending order
-            sorted_transactions = sorted(all_transactions, key=lambda x: x['date'], reverse=True)
+            sorted_transactions = sorted(items, key=lambda x: x['date'], reverse=True)
         
             # Create a list of dictionaries for repeating_panel_2
             self.repeating_panel_2_items = []
@@ -95,85 +90,67 @@ class customer_page(customer_pageTemplate):
       self.plot_1.layout = fig.layout
 
     def refresh_data(self):
-        user_dict = dict(self.user)
-        phone_number = user_dict.get('phone', None)
-        
-        if phone_number:
-            # Call the server function to get all transactions data
-            all_transactions = anvil.server.call('get_transactions')
-            
-            # DEBUG: Print the number of transactions retrieved from the server
-            print("Number of transactions retrieved:", len(all_transactions))
-            
-            # Filter transactions based on the user's phone number
-            transactions = [transaction for transaction in all_transactions if transaction['phone'] == phone_number or transaction['receiver_phone'] == phone_number]
-            
-            # DEBUG: Print the number of transactions after filtering
-            print("Number of transactions after filtering:", len(transactions))
-            
-            # Organize data for plotting (aggregate by date and type)
-            data_for_plot = {'Credit': {}, 'Debit': {}}  # Separate dictionaries for Credit and Debit transactions
-            for transaction in transactions:
-                date = transaction['date'].strftime("%Y-%m-%d")  # Format date as string for grouping
-                
-                trans_type = transaction['transaction_type']
-                fund = transaction['fund']  # Retrieve the 'fund' field
-                
-                if date not in data_for_plot[trans_type]:
-                    data_for_plot[trans_type][date] = 0
-                    
-                # Ensure fund is a string or a number before conversion
-                if isinstance(fund, (int, float)):
-                    money_amount = fund
-                elif isinstance(fund, str):
-                    # Extract numeric value from the 'fund' field
-                    try:
-                        money_amount = float(fund)
-                    except ValueError:
-                        money_amount = 0  # Handle cases where conversion to float fails
-                else:
-                    money_amount = 0  # Default to 0 if 'fund' is neither a string nor a number
-                
-                # Aggregate transaction amounts by date and type
-                if trans_type in data_for_plot:
-                    data_for_plot[trans_type][date] += money_amount
-            
-            # DEBUG: Print the data for plotting
-            print("Data for plotting:", data_for_plot)
-            
-            # Plot the data
-            categories = list(set(data_for_plot['Credit'].keys()) | set(data_for_plot['Debit'].keys()))  # Combine dates from Credit and Debit transactions
-            credit_values = [data_for_plot['Credit'].get(date, 0) for date in categories]  # Get credit values for each date or 0 if date not present
-            debit_values = [data_for_plot['Debit'].get(date, 0) for date in categories]    # Get debit values for each date or 0 if date not present
-            
-            # Define colors
-            credit_color = '#023c9c'
-            debit_color = '#91b4ed'
-            
-            # Create traces for Credit and Debit
-            credit_trace = go.Bar(x=categories, y=credit_values, name='Credit', marker_color=credit_color)
-            debit_trace = go.Bar(x=categories, y=debit_values, name='Debit', marker_color=debit_color)
-            
-            # Customize tickfont for x and y axes
-            tickfont = {'family': 'Arial', 'size': 14, 'color': 'black', 'weight': 'bold'}
-            
-            # Create layout
-            layout = go.Layout(
-                xaxis=dict(title='Date', tickfont=tickfont),
-                yaxis=dict(title='Amount', tickfont=tickfont),
-                barmode='group',
-                legend=dict(font=dict(size=16, weight='bold'))
-            )
-            
-            # Create figure
-            fig = go.Figure(data=[debit_trace, credit_trace], layout=layout)
-            
-            # Update plot with new figure
-            self.plot_1.data = fig.data
-            self.plot_1.layout = fig.layout
-            
-            # Set the plot to be visible
-            # self.plot_1.visible = True
+    # Get the user's phone number
+      phone_number = self.user['phone']
+  
+      # Call the server function to get transactions data
+      transactions = anvil.server.call('get_transactions')
+  
+      # DEBUG: Print the number of transactions retrieved from the server
+      print("Number of transactions retrieved:", len(transactions))
+  
+      # Filter transactions to include only those involving the user's phone number
+      filtered_transactions = [t for t in transactions if t['phone'] == phone_number or t['receiver_phone'] == phone_number]
+  
+      # DEBUG: Print the number of transactions after filtering
+      print("Number of transactions after filtering:", len(filtered_transactions))
+  
+      # Filter transactions to include only 'Credit' and 'Debit' types
+      filtered_transactions = [t for t in filtered_transactions if t['transaction_type'] in ['Credit', 'Debit']]
+  
+      # Organize data for plotting (aggregate by date and type)
+      data_for_plot = {'Credit': {}, 'Debit': {}}  # Separate dictionaries for Credit and Debit transactions
+      for transaction in filtered_transactions:
+          date = transaction['date'].strftime("%Y-%m-%d")  # Format date as string for grouping
+  
+          trans_type = transaction['transaction_type']
+          fund = transaction['fund']  # Retrieve the 'fund' field
+  
+          if date not in data_for_plot[trans_type]:
+              data_for_plot[trans_type][date] = 0
+  
+          # Ensure fund is a string or a number before conversion
+          if isinstance(fund, (int, float)):
+              money_amount = fund
+          elif isinstance(fund, str):
+              # Extract numeric value from the 'fund' field
+              try:
+                  money_amount = float(fund)
+              except ValueError:
+                  money_amount = 0  # Handle cases where conversion to float fails
+          else:
+              money_amount = 0  # Default to 0 if 'fund' is neither a string nor a number
+  
+          # Aggregate transaction amounts by date and type
+          if trans_type in data_for_plot:
+              data_for_plot[trans_type][date] += money_amount
+  
+      # DEBUG: Print the data for plotting
+      print("Data for plotting:", data_for_plot)
+  
+      # Plot the data
+      categories = list(set(data_for_plot['Credit'].keys()) | set(data_for_plot['Debit'].keys()))  # Combine dates from Credit and Debit transactions
+      categories.sort()  # Sort the dates for a proper time series plot
+      credit_values = [data_for_plot['Credit'].get(date, 0) for date in categories]  # Get credit values for each date or 0 if date not present
+      debit_values = [data_for_plot['Debit'].get(date, 0) for date in categories]    # Get debit values for each date or 0 if date not present
+  
+      self.plot_1.data = [
+          {'x': categories, 'y': debit_values, 'type': 'bar', 'name': 'Debit', 'marker': {'color': 'gray'}},
+          {'x': categories, 'y': credit_values, 'type': 'bar', 'name': 'Credit', 'marker': {'color': 'lightblue'}}
+      ]
+  
+      self.plot_1.visible = True
+
 
     def link_2_click(self, **event_args):
         open_form('customer.walletbalance', user=self.user)
