@@ -5,8 +5,8 @@ container:
     col_spacing: none}
 components:
 - name: image_1
-  properties: {height: 44, source: _/theme/account.png, horizontal_align: left, vertical_align: bottom,
-    spacing_above: large, spacing_below: none}
+  properties: {height: 44, source: _/theme/account.png, horizontal_align: center,
+    vertical_align: bottom, spacing_above: large, spacing_below: none}
   type: Image
   layout_properties: {grid_position: 'SZEEJJ,VOYDEZ', full_width_row: true}
 - name: label_1
@@ -40,7 +40,7 @@ components:
   data_bindings:
   - {property: text, code: 'self.item[''fund'']', writeback: false}
 - name: spacer_1
-  properties: {height: 4.666656494140625}
+  properties: {height: 5.5}
   type: Spacer
   layout_properties: {grid_position: 'SZEEJJ,CVEAUV AZQBVH,KUBGGR'}
 - name: text_box_2

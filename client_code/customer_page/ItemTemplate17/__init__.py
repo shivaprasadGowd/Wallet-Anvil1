@@ -14,6 +14,8 @@ class ItemTemplate17(ItemTemplate17Template):
             self.label_2.visible = False
             self.text_box_1.visible = False
             self.text_box_3.visible = False
+            self.text_box_2.visible= False
+            self.image_1.visible =False
             self.label_1.text = self.item['receiver_username']
         else:
             self.label_2.visible = True
@@ -24,3 +26,5 @@ class ItemTemplate17(ItemTemplate17Template):
             self.text_box_3.text = self.item['transaction_time']
             self.label_1.text = self.item['receiver_username']
             self.label_2.foreground = self.item['fund_color']
+            self.text_box_2.visible= True
+            self.image_1.visible = True
