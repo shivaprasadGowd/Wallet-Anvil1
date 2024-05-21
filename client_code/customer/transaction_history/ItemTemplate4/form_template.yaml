@@ -15,8 +15,7 @@ components:
   data_bindings:
   - {property: text, code: 'self.item[''receiver_username'']', writeback: false}
 - name: label_1
-  properties: {align: left, bold: true, background: '', font_size: 18, icon: 'fa:calendar',
-    icon_align: left}
+  properties: {align: left, bold: true, background: '', font_size: 18, icon: '', icon_align: left}
   type: Label
   layout_properties: {grid_position: 'ZYOIRV,IBJPSP'}
   data_bindings:
