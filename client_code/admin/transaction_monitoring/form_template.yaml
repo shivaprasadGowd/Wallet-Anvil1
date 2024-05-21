@@ -65,7 +65,7 @@ components:
       - name: label_3
         properties: {text: Report & Analysis}
         type: Label
-        layout_properties: {x: 66.9922, y: 9.00390625, width: 121.934}
+        layout_properties: {x: 67.078125, y: 0, width: 121.921875}
   - name: link_3
     properties: {text: '', align: center, bold: true}
     type: Link
@@ -90,7 +90,7 @@ components:
           icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
           underline: false, icon: ''}
         type: Label
-        layout_properties: {x: 66.15234375, y: 9.02340000000001, width: 154.824}
+        layout_properties: {x: 66.1875, y: 0, width: 154.8046875}
   - name: link_10
     properties: {text: '', align: center, bold: true}
     type: Link
@@ -114,7 +114,7 @@ components:
 
             '}
         type: Label
-        layout_properties: {x: 66.9922, y: 6.269449999999949, width: 167.91}
+        layout_properties: {x: 67.03125, y: 0, width: 167.90625}
   - name: link_4
     properties: {text: '', align: center, bold: true}
     type: Link
@@ -161,7 +161,7 @@ components:
           icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
           underline: false, icon: ''}
         type: Label
-        layout_properties: {x: 72, y: 3.9061999999999557, width: 112.344}
+        layout_properties: {x: 69.046875, y: 0, width: 112.3359375}
   - name: link_6
     properties: {text: '', align: center, bold: true}
     type: Link
@@ -183,7 +183,7 @@ components:
       - name: label_3_copy_4
         properties: {text: User Support}
         type: Label
-        layout_properties: {x: 72, y: 4.121100000000013, width: 109.102}
+        layout_properties: {x: 70.546875, y: 0, width: 109.1015625}
   - name: link_7
     properties: {text: '', bold: true, align: center, icon: '', icon_align: left}
     type: Link
@@ -205,7 +205,7 @@ components:
       - name: label_3_copy_5
         properties: {text: Add Currency}
         type: Label
-        layout_properties: {x: 73.984375, y: 4.6875, width: 108.965}
+        layout_properties: {x: 69.515625, y: 0, width: 108.9609375}
   - name: link_8_copy
     properties: {text: '', align: center, bold: true, icon: ''}
     type: Link
@@ -226,7 +226,7 @@ components:
       - name: label_3_copy_6
         properties: {text: User Management}
         type: Label
-        layout_properties: {x: 76, y: 4.785100000000057, width: 131.152}
+        layout_properties: {x: 70.03125, y: 0, width: 131.1328125}
   - name: spacer_1
     properties: {height: 204.5999755859375}
     type: Spacer
