@@ -5,6 +5,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
+from anvil import *
 
 
 class customer_page(customer_pageTemplate):
@@ -24,51 +25,60 @@ class customer_page(customer_pageTemplate):
             # Sort transactions by date in descending order
             sorted_transactions = sorted(items, key=lambda x: x['date'], reverse=True)
         
-            # Create a list of dictionaries for repeating_panel_2
-            self.repeating_panel_2_items = []
-            max_history_entries = 5  # Maximum number of history entries to display
-            for transaction in sorted_transactions:
-                fund = transaction['fund']
-                transaction_type = transaction['transaction_type']
-                receiver_phone = transaction['receiver_phone']
-                transaction_time = transaction['date'].strftime("%a-%I:%M %p")  # Concatenate day with time (e.g., Mon-06:20 PM)
+            # Check if there are any transactions
+            if not sorted_transactions:
+                self.repeating_panel_2.items = [{
+                    'fund': "",
+                    'receiver_username': "You're a new user, make some activity!",
+                    'transaction_text': "",
+                    'transaction_time': "",
+                    'fund_color': "black"
+                }]
+            else:
+                # Process transactions as before
+                self.repeating_panel_2_items = []
+                max_history_entries = 5  # Maximum number of history entries to display
+                for transaction in sorted_transactions:
+                    fund = transaction['fund']
+                    transaction_type = transaction['transaction_type']
+                    receiver_phone = transaction['receiver_phone']
+                    transaction_time = transaction['date'].strftime("%a-%I:%M %p")  # Concatenate day with time (e.g., Mon-06:20 PM)
         
-                # Fetch username from wallet_user table using receiver_phone
-                receiver_user = app_tables.wallet_users.get(phone=receiver_phone)
-                if receiver_user:
-                    receiver_username = receiver_user['username']
-                else:
-                    receiver_username = "Unknown"
+                    # Fetch username from wallet_user table using receiver_phone
+                    receiver_user = app_tables.wallet_users.get(phone=receiver_phone)
+                    if receiver_user:
+                        receiver_username = receiver_user['username']
+                    else:
+                        receiver_username = "Unknown"
         
-                # Set the transaction text and color based on transaction type
-                if transaction_type == 'Credit':
-                    transaction_text = "Received"
-                    fund_display = "+" + str(fund)
-                    fund_color = "green"
-                elif transaction_type == 'Debit':
-                    transaction_text = "Sent"
-                    fund_display = "-" + str(fund)
-                    fund_color = "blue"
-                else:
-                    transaction_text = "Unknown"
-                    fund_display = str(fund)
-                    fund_color = "black"
+                    # Set the transaction text and color based on transaction type
+                    if transaction_type == 'Credit':
+                        transaction_text = "Received"
+                        fund_display = "+" + str(fund)
+                        fund_color = "green"
+                    elif transaction_type == 'Debit':
+                        transaction_text = "Sent"
+                        fund_display = "-" + str(fund)
+                        fund_color = "blue"
+                    else:
+                        transaction_text = "Unknown"
+                        fund_display = str(fund)
+                        fund_color = "black"
         
-                # Append transaction details with username, transaction text, time, and day
-                self.repeating_panel_2_items.append({
-                    'fund': fund_display,
-                    'receiver_username': receiver_username,
-                    'transaction_text': transaction_text,
-                    'transaction_time': transaction_time,
-                    'fund_color': fund_color
-                })
+                    # Append transaction details with username, transaction text, time, and day
+                    self.repeating_panel_2_items.append({
+                        'fund': fund_display,
+                        'receiver_username': receiver_username,
+                        'transaction_text': transaction_text,
+                        'transaction_time': transaction_time,
+                        'fund_color': fund_color
+                    })
         
-                # Limit the maximum number of history entries to display
-                if len(self.repeating_panel_2_items) >= max_history_entries:
-                    break
+                    # Limit the maximum number of history entries to display
+                    if len(self.repeating_panel_2_items) >= max_history_entries:
+                        break
         
-            self.repeating_panel_2.items = self.repeating_panel_2_items
-
+                self.repeating_panel_2.items = self.repeating_panel_2_items
 
     def inr_balance(self, balance, currency_type):
         # Iterate through the iterator to find the balance for the specified currency_type
