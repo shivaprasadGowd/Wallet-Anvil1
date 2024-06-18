@@ -24,6 +24,7 @@ class withdraw(withdrawTemplate):
     
   def drop_down_1_change(self, **event_args):
     self.display()
+  
   def populate_balances(self):
       try:
           # Retrieve balances for the current user
@@ -87,6 +88,7 @@ class withdraw(withdrawTemplate):
       except Exception as e:
           # Print any exception that occurs during the process
           print("Error occurred during population of balances:", e)
+
   def display(self, **event_args):
     acc = self.drop_down_1.selected_value
 
@@ -156,6 +158,9 @@ class withdraw(withdrawTemplate):
             user_data['users_user_limit'] -= money_value
 
             self.label_2.text = "Money added successfully to the account."
+            
+            # Refresh the balance display
+            self.populate_balances()
         else:
             self.label_2.text = "Error: No matching accounts found for the user or invalid account number."
 
@@ -198,5 +203,3 @@ class withdraw(withdrawTemplate):
   def link_6_click(self, **event_args):
     """This method is called when the link is clicked"""
     open_form('customer.auto_topup',user=self.user)
-
-  
