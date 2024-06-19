@@ -53,7 +53,7 @@ class login(loginTemplate):
             self.label_4.visible = True
             self.label_5.visible = False
             self.label_6.visible = False
-            self.text_box_3.text = ''
+            self.text_box_3.text = '*'
             self.text_box_3.focus()
         else:
             # Alert if either username or password is incorrect
