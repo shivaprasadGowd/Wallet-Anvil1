@@ -13,7 +13,7 @@ class transfer(transferTemplate):
         self.user = user
         # Set Form properties and Data Bindings.
         username = anvil.server.call('get_username', self.user['users_phone'])
-        self.label_656.text = f"{username}"
+        # self.label_656.text = f"{username}"
         currencies=anvil.server.call('get_user_currency',self.user['users_phone'])
         self.drop_down_2.items= [str(row['users_balance_currency_type']) for row in currencies]
         self.display()
