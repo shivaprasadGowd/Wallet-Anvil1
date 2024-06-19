@@ -156,6 +156,8 @@ class withdraw(withdrawTemplate):
             user_data['users_daily_limit'] -= money_value
             user_data['users_user_limit'] -= money_value
 
+            #self.label_200.text = "Money withdrawn successfully from the account"
+            alert("Money withdrawn successfully from the account")
             self.label_2.text = "Money added successfully to the account."
             
             # Refresh the balance display

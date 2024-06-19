@@ -153,6 +153,8 @@ class transfer(transferTemplate):
                   depositor['users_daily_limit'] -= money_value
                   depositor['users_user_limit'] -= money_value
   
+                  #self.label_4.text = "Money transferred successfully to the account"
+                  alert("Money transferred successfully to the account")
                   self.label_4.text = "Money transferred successfully to the account."
                   self.populate_balances()
                   #self.label_4.text = "Money transferred successfully to the account"
