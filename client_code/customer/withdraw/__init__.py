@@ -12,8 +12,7 @@ class withdraw(withdrawTemplate):
     self.init_components(**properties)
     self.user = user
     # Set Form properties and Data Bindings.
-    username = anvil.server.call('get_username', self.user['users_phone'])
-    #self.label_1.text = f"Welcome to Green Gate Financial, {username}"
+    
     bank_names = anvil.server.call('get_user_bank_name', self.user['users_phone'])
     
     currencies=anvil.server.call('get_user_currency',self.user['users_phone'])
@@ -24,6 +23,7 @@ class withdraw(withdrawTemplate):
     
   def drop_down_1_change(self, **event_args):
     self.display()
+  
   def populate_balances(self):
       try:
           # Retrieve balances for the current user
@@ -87,6 +87,7 @@ class withdraw(withdrawTemplate):
       except Exception as e:
           # Print any exception that occurs during the process
           print("Error occurred during population of balances:", e)
+
   def display(self, **event_args):
     acc = self.drop_down_1.selected_value
 
@@ -157,6 +158,10 @@ class withdraw(withdrawTemplate):
 
             #self.label_200.text = "Money withdrawn successfully from the account"
             alert("Money withdrawn successfully from the account")
+            self.label_2.text = "Money added successfully to the account."
+            
+            # Refresh the balance display
+            self.populate_balances()
         else:
             #self.label_200.text = "Error: No matching accounts found for the user or invalid account number."
             alert("Error: No matching accounts found for the user or invalid account number.")
@@ -200,5 +205,3 @@ class withdraw(withdrawTemplate):
   def link_6_click(self, **event_args):
     """This method is called when the link is clicked"""
     open_form('customer.auto_topup',user=self.user)
-
-  
