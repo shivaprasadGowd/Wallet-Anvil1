@@ -185,3 +185,5 @@ class walletbalance(walletbalanceTemplate):
     def link_8_click(self, **event_args):
       """This method is called when the link is clicked"""
       open_form('customer.settings',user=self.user)
+
+    

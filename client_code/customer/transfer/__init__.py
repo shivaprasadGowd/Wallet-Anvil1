@@ -13,7 +13,7 @@ class transfer(transferTemplate):
         self.user = user
         # Set Form properties and Data Bindings.
         username = anvil.server.call('get_username', self.user['users_phone'])
-        #self.label_1.text = f"Welcome to Green Gate Financial, {username}"
+        self.label_656.text = f"{username}"
         currencies=anvil.server.call('get_user_currency',self.user['users_phone'])
         self.drop_down_2.items= [str(row['users_balance_currency_type']) for row in currencies]
         self.display()
@@ -155,6 +155,7 @@ class transfer(transferTemplate):
                   depositor['users_user_limit'] -= money_value
   
                   self.label_4.text = "Money transferred successfully to the account."
+                  self.populate_balances()
               else:
                   anvil.alert("Insufficient balance. Please add funds.")
       else:

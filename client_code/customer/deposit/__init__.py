@@ -13,7 +13,7 @@ class deposit(depositTemplate):
       self.user = user
       # Set Form properties and Data Bindings.
       username = anvil.server.call('get_username', self.user['users_phone'])
-      #self.label_1.text = f"Welcome to Green Gate Financial, {username}"
+      self.label_656.text = f"{username}"
       bank_names = anvil.server.call('get_user_bank_name', self.user['users_phone'])
       self.drop_down_1.items = [str(row['users_account_bank_name']) for row in bank_names]
       self.drop_down_2.items= anvil.server.call('get_currency_code')
@@ -129,6 +129,7 @@ class deposit(depositTemplate):
 
             #self.label_200.text = "Money added successfully to the account."
             alert("Money added successfully to the account.")
+            self.populate_balances()
             self.text_box_2.text = ''
           else:
             #self.label_200.text = "Error: No matching accounts found for the user or invalid account number."

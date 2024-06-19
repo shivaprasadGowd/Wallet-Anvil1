@@ -13,7 +13,7 @@ class withdraw(withdrawTemplate):
     self.user = user
     # Set Form properties and Data Bindings.
     username = anvil.server.call('get_username', self.user['users_phone'])
-    #self.label_1.text = f"Welcome to Green Gate Financial, {username}"
+    self.label_656.text = f"{username}"
     bank_names = anvil.server.call('get_user_bank_name', self.user['users_phone'])
     
     currencies=anvil.server.call('get_user_currency',self.user['users_phone'])
