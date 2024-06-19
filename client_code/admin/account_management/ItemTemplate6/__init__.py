@@ -7,9 +7,10 @@ from anvil.tables import app_tables
 
 class ItemTemplate6(ItemTemplate6Template):
   user=None
-  def __init__(self, **properties):
+  def __init__(self,user=None, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.user=user
     #test = self.user['users_username']
     print('hi admin test')
     

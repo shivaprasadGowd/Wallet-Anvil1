@@ -54,11 +54,14 @@ class login(loginTemplate):
             self.label_5.visible = False
             self.label_6.visible = False
             self.text_box_3.placeholder = '*'
+            self.text_box_3.text=''
             self.text_box_3.focus()
         else:
             # Alert if either username or password is incorrect
             alert("Incorrect username or password. Please try again.")
             self.text_box_3.text = ''
+            self.text_box_3.placeholder = '*'
+            
             self.text_box_3.focus()
 
     def link_2_click(self, **event_args):

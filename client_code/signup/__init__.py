@@ -37,9 +37,9 @@ class signup(signupTemplate):
             self.label_15.foreground = "#990000"
             self.text_box_3.text =' '
             self.text_box_3.placeholder='*' 
-            
+           
+
             self.text_box_3.focus()
-            self.timer_1.enabled = True
 
         aadhar = int(self.text_box_7.text)
         if len(str(aadhar)) == 12:
@@ -50,6 +50,7 @@ class signup(signupTemplate):
             self.aadhar_card.visible = True
             self.label_16.text ="Please verify the entered Aadhar details"
             self.label_16.foreground = "#990000"
+            self.text_box_7.placeholder='*'
             self.text_box_7.text=''
             self.text_box_7.focus()
 
@@ -62,6 +63,7 @@ class signup(signupTemplate):
             self.pan_card.visible = True
             self.label_14.text ="Please verify the entered pan card details"
             self.label_14.foreground = "#990000"
+            self.text_box_8.placeholder='*'
             self.text_box_8.text=''
             self.text_box_8.focus()
 
@@ -78,14 +80,18 @@ class signup(signupTemplate):
                 self.pass_card.visible = True
                 self.label_17.text = "Passwords don't match"
                 self.label_17.foreground = "#990000"
+                self.text_box_5.placeholder='*'
                 self.text_box_5.text =''
                 self.text_box_5.focus()
+                self.text_box_6.placeholder='*'
                 self.text_box_6.text =''
                 self.text_box_6.focus()
         else:
             self.pass_card.visible = True
             self.label_17.text = "Password must have at least 1 number, 1 character, 1 symbol, and be at least 8 characters long."
             self.label_17.foreground = "#990000"
+            self.text_box_5.placeholder='*'
+            self.text_box_6.placeholder='*'
             self.text_box_5.text = ''
             self.text_box_6.text = ''
             self.text_box_5.focus()
@@ -109,13 +115,7 @@ class signup(signupTemplate):
   def link_1_click(self, **event_args):
     open_form('Home')
 
-  def timer_1_tick(self, **event_args):
-        """This method is called every 0.1 seconds."""
-        if self.text_box_3.text == "":
-            self.text_box_3.placeholder = "*"  # Ensure placeholder text is correct
-            self.text_box_3.foreground = "red"  # Set placeholder color to red
-        else:
-            self.timer_1.enabled = False 
+  
 
   def text_box_8_change(self, **event_args):
     current_text = self.text_box_8.text

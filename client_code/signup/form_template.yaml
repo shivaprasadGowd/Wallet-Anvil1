@@ -1,7 +1,34 @@
 is_package: true
 container:
   type: HtmlTemplate
-  properties: {html: ''}
+  properties:
+    html: |
+      <style>
+          /* Custom CSS for the placeholder text */
+          .custom-input {
+              position: relative;
+              margin-bottom: 10px;
+          }
+          .custom-input input[type=text] {
+              width: 100%;
+              padding: 8px;
+              box-sizing: border-box;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              font-size: 16px;
+          }
+          .custom-input input[type=text]::placeholder {
+              color: red; /* Placeholder color */
+          }
+      </style>
+
+      <div class="custom-input">
+          <input type="text" id="custom-textbox" placeholder="Enter your text here">
+      </div>
+
+      <script>
+          // JavaScript code can be added here if necessary
+      </script>
 components:
 - type: ColumnPanel
   properties: {}
