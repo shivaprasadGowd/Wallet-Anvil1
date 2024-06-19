@@ -203,7 +203,7 @@ components:
   layout_properties: {grid_position: 'YAOOOQ,KAIDML TSCBBA,SQBVZH'}
   name: card_130
   components:
-  - properties: {text: Wallet Balance, bold: true, font_size: 22, align: center, foreground: white}
+  - properties: {text: Wallet Balance, bold: true, font_size: 25, align: center, foreground: white}
     type: Label
     layout_properties: {grid_position: 'UCZQZN,BWDONS'}
     name: label_111
