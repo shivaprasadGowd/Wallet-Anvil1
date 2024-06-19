@@ -35,8 +35,11 @@ class signup(signupTemplate):
             self.phone_card.visible = True
             self.label_15.text ="Invalid Phone Number"
             self.label_15.foreground = "#990000"
-            self.text_box_3.text=''
+            self.text_box_3.text =' '
+            self.text_box_3.placeholder='*' 
+            
             self.text_box_3.focus()
+            self.timer_1.enabled = True
 
         aadhar = int(self.text_box_7.text)
         if len(str(aadhar)) == 12:
@@ -105,6 +108,14 @@ class signup(signupTemplate):
 
   def link_1_click(self, **event_args):
     open_form('Home')
+
+  def timer_1_tick(self, **event_args):
+        """This method is called every 0.1 seconds."""
+        if self.text_box_3.text == "":
+            self.text_box_3.placeholder = "*"  # Ensure placeholder text is correct
+            self.text_box_3.foreground = "red"  # Set placeholder color to red
+        else:
+            self.timer_1.enabled = False 
 
   def text_box_8_change(self, **event_args):
     current_text = self.text_box_8.text

@@ -112,7 +112,9 @@ a, a:focus {
   text-decoration: none;
   color: %color:Primary 700%;
 }
-
+.red-placeholder::placeholder {
+    color: red;
+}
 a:hover, a:active {
   color: %color:Primary 500%;
 }
