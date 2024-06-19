@@ -160,9 +160,12 @@ class withdraw(withdrawTemplate):
             
             # Refresh the balance display
             self.populate_balances()
+            #self.label_200.text = "Money withdrawn successfully from the account"
+            alert("Money withdrawn successfully from the account")
         else:
-            self.label_2.text = "Error: No matching accounts found for the user or invalid account number."
-
+            #self.label_200.text = "Error: No matching accounts found for the user or invalid account number."
+            alert("Error: No matching accounts found for the user or invalid account number.")
+  
   def link_2_click(self, **event_args):
       """This method is called when the link is clicked"""
       open_form("customer.walletbalance",user=self.user)

@@ -155,10 +155,13 @@ class transfer(transferTemplate):
   
                   self.label_4.text = "Money transferred successfully to the account."
                   self.populate_balances()
+                  #self.label_4.text = "Money transferred successfully to the account"
+                  alert("Money transferred successfully to the account")
               else:
-                  anvil.alert("Insufficient balance. Please add funds.")
+                  anvil.alert("Insufficient balance. Please add funds")
       else:
-          self.label_4.text = "Error: No matching accounts found for the user or invalid account number."
+          #self.label_4.text = "Error: No matching accounts found for the user or invalid account number"
+          alert("Error: No matching accounts found for the user or invalid account number")
   
       open_form('customer.transfer', user=self.user)
           
