@@ -140,6 +140,15 @@ a:hover, a:active {
   font-size: 112px;
   font-weight: light;
 }
+.app-bar input.anvil-component::placeholder, .app-bar textarea.anvil-component::placeholder  {
+  color: red;
+}
+.app-bar input.anvil-component::-webkit-input-placeholder, .app-bar textarea.anvil-component::-webkit-input-placeholder {
+  color: red;
+}
+.app-bar input.anvil-component::-moz-placeholder, .app-bar textarea.anvil-component::-moz-placeholder {
+  color: red;
+}
 
 .anvil-role-text {
   font-size: 14px;
